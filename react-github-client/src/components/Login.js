@@ -28,7 +28,7 @@ export default function Login() {
 
       const proxy_url = state.proxy_url;
 
-      // Use code parameter and other parameters to make POST request to proxy_server
+      
       fetch(proxy_url, {
         method: "POST",
         body: JSON.stringify(requestData)

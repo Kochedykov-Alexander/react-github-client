@@ -6,7 +6,6 @@ import { initialState, reducer } from "./store/reducer";
 
 
 export const AuthContext = React.createContext(initialState);
-
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
