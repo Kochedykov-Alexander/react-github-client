@@ -21,9 +21,9 @@ function App() {
     >
     <Router>
       <Switch>
-        <Route path="/login" component={Login}/>
-        <Route path="/" component={Home}/>
-        <Route path="/repositories" component={ListRepositories} />
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/repositories" component={ListRepositories} />
       </Switch>
     </Router>
     </AuthContext.Provider>

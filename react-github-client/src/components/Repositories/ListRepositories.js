@@ -3,11 +3,12 @@ import Styled from "styled-components";
 import { AuthContext } from "../../App";
 import { Redirect } from "react-router-dom";
 
-export default function ListRepositories(params) {
+export default function ListRepositories() {
 
     const { state, dispatch } = useContext(AuthContext);
+    const [data, setData] = useState();
 
-    if (!state.isLoggedIn) {
+   if (!state.isLoggedIn) {
         return <Redirect to="/login" />;
     }
 
@@ -19,14 +20,25 @@ export default function ListRepositories(params) {
       dispatch({
         type: "LOGOUT"
       });
-    } 
-  
+    }
+    
+    useEffect(() => {
+      fetch("https://api.github.com/users/Kochedykov-Alexander/repos")
+        .then((response) =>{ return JSON.parse(response) })
+        .then((data) =>{ alert(data);})
+    }, []);
+
+    const template = Object.keys(data.Object).map(item => <span key={data.books[item].id}>{data.books[item].author} - {data.books[item].name}</span>)
+
     return (
       <Wrapper>
         <div className="container">
           <button onClick={()=> handleLogout()}>Logout</button>
           <div>
             <div className="content">
+              <div className="list">
+                <span>тут будет список объектов из json</span>
+              </div>
             </div>
           </div>
         </div>
