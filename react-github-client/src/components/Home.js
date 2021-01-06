@@ -11,7 +11,7 @@ export default function Home() {
     return <Redirect to="/login" />;
   }
 
-  const { avatar_url, name, public_repos, followers, following } = state.user
+  const { avatar_url, name, public_repos, followers, following, bio } = state.user
 
   const handleLogout = () => {
     dispatch({
@@ -30,6 +30,7 @@ export default function Home() {
             <span>{public_repos} Repos</span>
             <span>{followers} Followers</span>
             <span>{following} Following</span>
+            
           </div>
         </div>
       </div>

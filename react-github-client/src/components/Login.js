@@ -27,7 +27,6 @@ export default function Login() {
       };
 
       const proxy_url = state.proxy_url;
-
       
       fetch(proxy_url, {
         method: "POST",
@@ -48,6 +47,7 @@ export default function Login() {
         });
     }
   }, [state, dispatch, data]);
+  console.log(state);
 
   if (state.isLoggedIn) {
     return <Redirect to="/" />;
