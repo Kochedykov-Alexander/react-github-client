@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 export default function ListRepositories() {
 
     const { state, dispatch } = useContext(AuthContext);
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
 
    if (!state.isLoggedIn) {
         return <Redirect to="/login" />;
@@ -24,20 +24,33 @@ export default function ListRepositories() {
     
     useEffect(() => {
       fetch("https://api.github.com/users/Kochedykov-Alexander/repos")
-        .then((response) =>{ return JSON.parse(response) })
-        .then((data) =>{ alert(data);})
+        .then((response) => response.json())
+        .then(
+          (d) => {
+            setData(d)
+          })
     }, []);
+    console.log(data);
 
-    const template = Object.keys(data.Object).map(item => <span key={data.books[item].id}>{data.books[item].author} - {data.books[item].name}</span>)
-
+   
+  
     return (
+      
       <Wrapper>
         <div className="container">
           <button onClick={()=> handleLogout()}>Logout</button>
           <div>
             <div className="content">
               <div className="list">
-                <span>тут будет список объектов из json</span>
+              
+                <ul>
+                  {data.map(item => (
+
+                  <li><a href={item.html_url}>{item.name}</a></li>
+                  ))}
+                </ul>
+                  
+              
               </div>
             </div>
           </div>
