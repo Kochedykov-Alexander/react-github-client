@@ -4,12 +4,14 @@ import Styled from "styled-components";
 import { AuthContext } from "../App";
 
 
-export default function Home() {
+export default function Home(props) {
   const { state, dispatch } = useContext(AuthContext);
 
   if (!state.isLoggedIn) {
     return <Redirect to="/login" />;
   }
+
+  console.log(props.match.params.name);
 
   const { avatar_url, name, public_repos, followers, following, bio } = state.user
 

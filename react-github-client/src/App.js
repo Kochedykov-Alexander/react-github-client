@@ -2,6 +2,7 @@ import React, { createContext, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import FullProfile from './components/Profile/FullProfile';
 import ListRepositories from "./components/Repositories/ListRepositories";
 import { initialState, reducer } from "./store/reducer";
 
@@ -10,6 +11,7 @@ export const AuthContext = React.createContext(initialState);
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(reducer,initialState);
+  
   return (
     <AuthContext.Provider
       value={
@@ -22,8 +24,10 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/login" component={Login}/>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/profile/:login" component={FullProfile}/>
         <Route exact path="/repositories" component={ListRepositories} />
+        <Route exact path="/" component={Home}/>
+        
       </Switch>
     </Router>
     </AuthContext.Provider>

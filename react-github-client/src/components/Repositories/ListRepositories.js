@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import Styled from "styled-components";
 import { AuthContext } from "../../App";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink} from "react-router-dom";
 
 export default function ListRepositories() {
 
+  
     const { state, dispatch } = useContext(AuthContext);
     const [data, setData] = useState([]);
 
@@ -12,9 +13,11 @@ export default function ListRepositories() {
         return <Redirect to="/login" />;
     }
 
-    const { repos_url } = state.user
+    const { repos_url, login } = state.user
+    
 
-    console.log(repos_url);
+    
+
 
     const handleLogout = () => {
       dispatch({
@@ -49,7 +52,7 @@ export default function ListRepositories() {
                   <li><a href={item.html_url}>{item.name}</a></li>
                   ))}
                 </ul>
-                  
+                <NavLink to={`/profile/${login}`}>{login}</NavLink>
               
               </div>
             </div>
