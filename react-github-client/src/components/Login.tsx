@@ -16,10 +16,12 @@ export default function Login() {
     const url = window.location.href;
     const hasCode = url.includes("?code=");
 
+    console.log(state);
+
     // If Github API returns the code parameter
     if (hasCode) {
       const newUrl = url.split("?code=");
-      window.history.pushState({}, null, newUrl[0]);
+      window.history.pushState({},'', newUrl[0]);
       setData({ ...data, isLoading: true });
 
       const requestData = {

@@ -15,9 +15,15 @@ export default function Home() {
 
   const handleLogout = () => {
     dispatch({
-      type: "LOGOUT"
+      type: "LOGOUT",
+      payload:{
+        isLoggedIn: false,
+        user: state.user
+      }
     });
   } 
+
+  console.log(state.user)
 
   return (
     <Wrapper>
@@ -35,6 +41,7 @@ export default function Home() {
       </div>
     </Wrapper>
   );
+  
 }
 
 const Wrapper = Styled.section`

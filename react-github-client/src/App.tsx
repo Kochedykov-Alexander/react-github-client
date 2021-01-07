@@ -1,23 +1,22 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, Dispatch, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import { initialState, reducer } from "./store/reducer";
 
 
-export const AuthContext = React.createContext(initialState);
-function App() {
+interface IContextProps {
+  state: any; 
+  dispatch: Dispatch<{ type: any; payload: { isLoggedIn: any; user: any; }; }>;
+}
+
+export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const value = { state, dispatch };
   console.log(reducer,initialState);
   return (
     <AuthContext.Provider
-      value={
-        {
-        state,
-        dispatch
-      }
-    }
-    >
+    value={value}> 
     <Router>
       <Switch>
         <Route path="/login" component={Login}/>
@@ -28,4 +27,5 @@ function App() {
   );
 }
 
-export default App;
+export const AuthContext = React.createContext({} as IContextProps);
+
