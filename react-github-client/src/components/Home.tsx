@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
 import Styled from "styled-components";
 import { AuthContext } from "../App";
+import Header from "./Header";
+import Footer from "./Footer";
 
 
-export default function Home() {
+export default function Home(props: { match: { params: { login: string;}; }; }) {
   const { state, dispatch } = useContext(AuthContext);
 
   if (!state.isLoggedIn) {
@@ -27,8 +29,8 @@ export default function Home() {
 
   return (
     <Wrapper>
+      <Header {...props}></Header>
       <div className="container">
-        <button onClick={()=> handleLogout()}>Logout</button>
         <div>
           <div className="content">
             <img src={avatar_url} alt="Avatar"/>
@@ -39,6 +41,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </Wrapper>
   );
   

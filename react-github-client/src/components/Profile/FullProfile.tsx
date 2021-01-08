@@ -2,8 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import Styled from "styled-components";
 import { AuthContext } from "../../App";
 import { Redirect, NavLink } from "react-router-dom";
+import Header from "../Header";
+import Footer from "../Footer";
+import { from } from "form-data";
 
-export default function FullProfile(props: { match: { params: { login: string; }; }; }) {
+export default function FullProfile(props: { match: { params: { login: string;}; }; }) {
     
 const { state, dispatch } = useContext(AuthContext);
 const [follower, setFollowers] = useState([{login:''}]);
@@ -66,8 +69,8 @@ const handleLogout = () => {
 
 return (
   <Wrapper>
+    <Header {...props}></Header>
   <div className="container">
-    <button onClick={()=> handleLogout()}>Logout</button>
     <div>
       <div className="content">
         <img src={avatar_url} alt="Avatar"/>
@@ -89,6 +92,7 @@ return (
       </div>
     </div>
   </div>
+  <Footer></Footer>
 </Wrapper>
   );
 }

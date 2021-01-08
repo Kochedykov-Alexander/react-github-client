@@ -4,9 +4,11 @@ import { AuthContext } from "../../App";
 import { Redirect, NavLink } from "react-router-dom";
 import File from "../img/icons/file.png";
 import Folder from "../img/icons/folders.png";
+import Header from "../Header";
+import Footer from "../Footer";
 import { from } from "form-data";
 
-export default function ProfilePage(props: { match: { params: { login: string; }; }; }) {
+export default function ProfilePage(props: { match: { params: { login: string;}; }; }) {
 
 const { state, dispatch } = useContext(AuthContext);
 const [data, setData] = useState({login:'', followers:0, following:0, public_repos:0, name:'', bio:'', email:'', avatar_url:''});
@@ -41,10 +43,7 @@ const {login, followers, following, public_repos, name, bio, email, avatar_url} 
 
 return(
     <Wrapper>
-
-        <div className = "button__item">
-        <button onClick={()=> handleLogout()}>Logout</button>
-        </div>	        
+        <Header {...props}></Header>     
         <div className="content">
 
 <div className="profile">
@@ -108,7 +107,7 @@ return(
     </div>
 
 </div>
-
+<Footer></Footer>
     </Wrapper>
 );
 }

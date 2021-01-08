@@ -3,8 +3,10 @@ import Styled from "styled-components";
 import { AuthContext } from "../../App";
 import { Redirect, NavLink} from "react-router-dom";
 import { statement } from "@babel/template";
+import Header from "../Header";
+import Footer from "../Footer";
 
-export default function ListRepositories() {
+export default function ListRepositories(props: { match: { params: { login: string; }; }; }) {
 
   
     const { state, dispatch } = useContext(AuthContext);
@@ -18,15 +20,6 @@ export default function ListRepositories() {
 
     console.log(state)
     
-    const handleLogout = () => {
-      dispatch({
-        type: "LOGOUT",
-        payload:{
-          isLoggedIn: false,
-          user: state.user
-        }
-      });
-    } 
     
     useEffect(() => {
       fetch("https://api.github.com/users/Kochedykov-Alexander/repos")
@@ -41,8 +34,8 @@ export default function ListRepositories() {
     return (
       
       <Wrapper>
+        <Header {...props}></Header>
         <div className="container">
-          <button onClick={()=> handleLogout()}>Logout</button>
           <div>
             <div className="content">
               <div className="list">
@@ -59,6 +52,7 @@ export default function ListRepositories() {
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </Wrapper>
     );
   }
