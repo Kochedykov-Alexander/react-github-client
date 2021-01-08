@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import Styled from "styled-components";
 import { AuthContext } from "../../App";
 import { Redirect, NavLink } from "react-router-dom";
+import File from "../img/icons/file.png";
+import Folder from "../img/icons/folders.png";
+import { from } from "form-data";
 
 export default function ProfilePage(props: { match: { params: { login: string; }; }; }) {
 
@@ -91,8 +94,8 @@ return(
 
                         <div className="profile__item__repo">
 										<span>
-										<img src="public/folders.png"  alt="" />
-										<img src="../../../public/file.png" className="img__repo" alt="" />
+										<img src={File}  alt="" />
+										<img src={Folder} className="img__repo" alt="" />
 										</span>
 						</div>
 
