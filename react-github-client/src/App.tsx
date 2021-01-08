@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import FullProfile from './components/Profile/FullProfile';
 import ListRepositories from "./components/Repositories/ListRepositories";
 import { initialState, reducer } from "./store/reducer";
-
+import ProfilePage from './components/Profile/ProfilePage';
 
 interface IContextProps {
   state: any; 
@@ -25,6 +25,7 @@ export default function App() {
         <Route exact path="/" component={Home}/>
         <Route exact path="/profile/:login" component={FullProfile}/>
         <Route exact path="/repositories" component={ListRepositories} />
+        <Route exact path="/profile/:login/full" component={ProfilePage}/>
       </Switch>
     </Router>
     </AuthContext.Provider>

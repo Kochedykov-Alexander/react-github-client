@@ -6,10 +6,10 @@ import { Redirect, NavLink } from "react-router-dom";
 export default function FullProfile(props: { match: { params: { login: string; }; }; }) {
     
 const { state, dispatch } = useContext(AuthContext);
-const [follower, setFollowers] = useState([]);
-const [following1, setFollowing] = useState([]);
-const [data, setData] = useState({avatar_url:'', name:'', public_repos:0, followers:0, following:0});
-const [link , setLink] = useState(false);
+const [follower, setFollowers] = useState([{login:''}]);
+const [following1, setFollowing] = useState([{login:''}]);
+const [data, setData] = useState({avatar_url:'', name:'', public_repos:0, followers:0, following:0,login:''});
+
 
 
 if (!state.isLoggedIn) {
@@ -25,7 +25,7 @@ useEffect(() => {
       (d) => {
         setData(d)
   })
-}, []);
+}, [data]);
 
   
 
@@ -37,7 +37,7 @@ useEffect(() => {
       (d) => {
         setFollowers(d)
       })
-    }, []);
+    }, [follower]);
 
 
 useEffect(() => {
@@ -47,21 +47,12 @@ useEffect(() => {
       (d) => {
         setFollowing(d)
       })
-    }, []);
+    }, [following1]);
 
-
-const onClickData = () => {
-  fetch(url)
-    .then((response) => response.json())
-    .then(
-      (d) => {
-        setData({...data})
-      })
-    }
 
 console.log(data)   
 
-const {avatar_url, name, public_repos, followers, following} = data;
+const {avatar_url, name, public_repos, followers, following, login} = data;
 
 const handleLogout = () => {
   dispatch({
@@ -84,17 +75,17 @@ return (
         <span>{public_repos} Repos</span>
         <span>{followers} Followers:</span>
         <ul>
-          {follower.map(item => (
-                  <li><NavLink to={`/profile/${props.match.params.login}` }>{props.match.params.login}</NavLink></li>
+          {follower.map(follower => (
+                  <li><NavLink to={`/profile/${follower.login}` }>{follower.login}</NavLink></li>
                   ))}
                 </ul>
         <span>{following} Following: </span>
         <ul>                  
-          {following1.map(item => (
-                  <li><NavLink to={`/profile/${props.match.params.login}`} onClick = {onClickData} >{props.match.params.login}</NavLink></li>
+          {following1.map(following1 => (
+                  <li><NavLink to={`/profile/${following1.login}`} >{following1.login}`</NavLink></li>
                   ))}
         </ul>
-        
+        <NavLink to={`/profile/${props.match.params.login}/full`}>More information</NavLink>
       </div>
     </div>
   </div>
