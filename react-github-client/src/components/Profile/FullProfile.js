@@ -9,7 +9,7 @@ const { state, dispatch } = useContext(AuthContext);
 const [follower, setFollowers] = useState([]);
 const [following1, setFollowing] = useState([]);
 const [data, setData] = useState([]);
-const [link , setLink] = useState(false);
+
 
 
 if (!state.isLoggedIn) {
@@ -25,7 +25,7 @@ useEffect(() => {
       (d) => {
         setData(d)
   })
-}, []);
+}, [data]);
 
   
 
@@ -36,29 +36,21 @@ useEffect(() => {
       (d) => {
         setFollowers(d)
       })
-    }, []);
+    }, [follower]);
 
 
-    useEffect(() => {
+  useEffect(() => {
   fetch("https://api.github.com/users/" + props.match.params.login + "/following")
     .then((response) => response.json())
     .then(
       (d) => {
         setFollowing(d)
       })
-    }, []);
+    }, [following1]);
 
 
-    const onClickData = () => {
-      fetch(url)
-    .then((response) => response.json())
-    .then(
-      (d) => {
-        setData(d)
-      })
-    }
-
-const {avatar_url, name, public_repos, followers, following} = data;
+    
+const {avatar_url, name, public_repos, followers, following, login} = data;
 
 const handleLogout = () => {
   dispatch({
@@ -85,10 +77,11 @@ return (
         <span>{following} Following: </span>
         <ul>                  
           {following1.map(item => (
-                  <li><NavLink to={`/profile/${item.login}`} onClick = {onClickData} >{item.login}</NavLink></li>
+                  <li><NavLink to={`/profile/${item.login}`}  >{item.login}</NavLink></li>
                   ))}
         </ul>
-        
+
+        <NavLink to={`/profile/${login}/full`}>More information</NavLink>
       </div>
     </div>
   </div>

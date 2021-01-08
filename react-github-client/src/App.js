@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import FullProfile from './components/Profile/FullProfile';
+import ProfilePage from './components/Profile/ProfilePage';
 import ListRepositories from "./components/Repositories/ListRepositories";
 import { initialState, reducer } from "./store/reducer";
 
@@ -27,7 +28,7 @@ function App() {
         <Route exact path="/profile/:login" component={FullProfile}/>
         <Route exact path="/repositories" component={ListRepositories} />
         <Route exact path="/" component={Home}/>
-        
+        <Route exact path="/profile/:login/full" component={ProfilePage}/>
       </Switch>
     </Router>
     </AuthContext.Provider>
