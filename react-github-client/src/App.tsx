@@ -2,6 +2,8 @@ import React, { createContext, Dispatch, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import FullProfile from './components/Profile/FullProfile';
+import ListRepositories from "./components/Repositories/ListRepositories";
 import { initialState, reducer } from "./store/reducer";
 
 
@@ -19,8 +21,10 @@ export default function App() {
     value={value}> 
     <Router>
       <Switch>
-        <Route path="/login" component={Login}/>
-        <Route path="/" component={Home}/>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/profile/:login" component={FullProfile}/>
+        <Route exact path="/repositories" component={ListRepositories} />
       </Switch>
     </Router>
     </AuthContext.Provider>
