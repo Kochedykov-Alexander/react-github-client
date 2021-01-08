@@ -24,7 +24,7 @@ export default function Home(props) {
   return (
     <Wrapper>
       <div className="container">
-        <button onClick={()=> handleLogout()}>Logout</button>
+       
         <div>
           <div className="content">
             <img src={avatar_url} alt="Avatar"/>
@@ -35,7 +35,18 @@ export default function Home(props) {
             
           </div>
         </div>
-      </div>
+
+        <div class="footer">
+		<div class="footer__name">2021 © Все права защищены</div>
+		<div class="footer__name">React course ITIS</div>
+		<div class="footer__name"><button class="btn-logout">Logout</button></div>
+	</div>
+
+	</div>
+
+     
+
+      
     </Wrapper>
   );
 }
@@ -46,22 +57,7 @@ const Wrapper = Styled.section`
   flex-direction: column;
   height: 100vh;
   font-family: Arial;
-  button{
-    all: unset;
-    width: 100px;
-    height: 35px;
-    margin: 10px 10px 0 0;
-    align-self: flex-end;
-    background-color: #0041C2;
-    color: #fff;
-    text-align: center;
-    border-radius: 3px;
-    border: 1px solid #0041C2;
-    &:hover{
-      background-color: #fff;
-      color: #0041C2;
-    }
-  }
+ 
   >div{
     height: 100%;
     width: 100%;
@@ -94,5 +90,40 @@ const Wrapper = Styled.section`
   
     }
   }
+}
+
+.footer {
+  position: fixed; /* Фиксированное положение */
+  left: 0; bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  height: 50px;
+  margin-top: 50px;
+  background-color: #000;
+  color: #fff;
+  opacity: 0.6;
+  
+}
+
+
+
+.btn-logout {
+  all: unset;
+    width: 100px;
+    height: 35px;
+    background-color: #0041C2;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    font-family: Arial;
+    border: 1px solid #0041C2;
+    
+    &:hover{
+      background-color: #fff;
+      color: #0041C2;
+}
 }
 `;
