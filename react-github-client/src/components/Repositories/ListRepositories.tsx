@@ -1,16 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import Styled from "styled-components";
 import { AuthContext } from "../../App";
-import { Redirect, NavLink} from "react-router-dom";
+import { Redirect, NavLink, Link} from "react-router-dom";
 import { statement } from "@babel/template";
 import Header from "../Header";
 import Footer from "../Footer";
+import axios from 'axios';
 
 export default function ListRepositories(props: { match: { params: { login: string; }; }; }) {
 
   
     const { state, dispatch } = useContext(AuthContext);
-    const [data, setData] = useState([{repos_url:'', login:'',html_url:'',name:''}]);
+    const [data, setData] = useState([{id:0,repos_url:'', login:'',html_url:'',name:'',description:'',language:'',owner:{login:''}}]);
+
+    const api = axios.create({
+      baseURL: 'https://api.github.com',
+    });
 
    if (!state.isLoggedIn) {
         return <Redirect to="/login" />;
@@ -20,96 +25,68 @@ export default function ListRepositories(props: { match: { params: { login: stri
 
     console.log(state)
     
-    
     useEffect(() => {
-      fetch("https://api.github.com/users/Kochedykov-Alexander/repos")
-        .then((response) => response.json())
-        .then(
-          (d) => {
-            setData(d)
-          })
-    }, []);
-    console.log(data);
+      api.get(`users/` + props.match.params.login + `/repos`).then(response => {
+        setData(response.data);
+      });
+    }, [state.user]);
 
     return (
-      
-      <Wrapper>
+      <ReposList>
         <Header {...props}></Header>
-        <div className="container">
-          <div>
-            <div className="content">
-              <div className="list">
+        
+        {data.map(repository => (
+        <Link className="link" key={repository.id} to={`/repository/${repository.owner.login}/${repository.name}`}>
               
-                <ul>
-                  {data.map(data => (
-
-                  <li><a href={data.html_url}>{data.name}</a></li>
-                  ))}
-                </ul>
-                <NavLink to={`/profile/${login}`}>{login}</NavLink>
-              
-              </div>
-            </div>
-          </div>
-        </div>
+                  <div>                 
+                    <strong>{repository.name}</strong>
+                    <p>{repository.description}</p>
+                    <div className="repoInfo">
+                    <p className="p2">
+                      language:  {repository.language}
+                    </p>
+                    </div>
+                    
+                  </div>
+                  
+        </Link>  
+        ))}
         <Footer></Footer>
-      </Wrapper>
+        </ReposList>
     );
   }
   
-  const Wrapper = Styled.section`
-  .container{
+  const ReposList = Styled.div`
+  margin-top: 5px;
+  margin-bottom: 5%;
+  .link {
+    text-decoration: none;
+    background: LightSkyBlue;
+    border-radius: 10px;
+    width: 40%;
+    padding: 20px;
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-    font-family: Arial;
-    button{
-      all: unset;
-      width: 100px;
-      height: 35px;
-      margin: 10px 10px 0 0;
-      align-self: flex-end;
-      background-color: #0041C2;
-      color: #fff;
-      text-align: center;
-      border-radius: 3px;
-      border: 1px solid #0041C2;
-      &:hover{
-        background-color: #fff;
-        color: #0041C2;
+    justify-content: center;
+    margin-left: 30%;
+    align-items: center;
+    transition: transform 0.4s;
+    & + .link {
+      margin-top: 16px;
+    }
+    &:hover {
+      transform: translateX(-10px);
+      box-shadow: 2px 2px white, 8px 8px Navy;
+    }
+    div {      
+      
+      font-size: 25px;
+      color: MidnightBlue;
+      p {
+        font-size: 20px;
+        color: DarkSlateBlue;
+        margin-top: 5px;
       }
     }
-    >div{
-      height: 100%;
-      width: 100%;
-      display: flex;
-      font-size: 18px;
-      justify-content: center;
-      align-items: center;
-      .content{
-        display: flex;
-        flex-direction: column;
-        padding: 20px 100px;    
-        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
-        width: auto;
     
-        img{
-          height: 150px;
-          width: 150px;
-          border-radius: 50%;
-        }
-    
-        >span:nth-child(2){
-          margin-top: 20px;
-          font-weight: bold;
-        }
-    
-        >span:not(:nth-child(2)){
-          margin-top: 8px;
-          font-size: 14px;
-        }
-    
-      }
-    }
   }
-  `;
+`;

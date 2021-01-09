@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import FullProfile from './components/Profile/FullProfile';
 import ListRepositories from "./components/Repositories/ListRepositories";
+import FullRepository from './components/Repositories/FullRepository';
 import { initialState, reducer } from "./store/reducer";
 import ProfilePage from './components/Profile/ProfilePage';
 
@@ -24,7 +25,8 @@ export default function App() {
         <Route exact path="/login" component={Login}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/profile/:login" component={FullProfile}/>
-        <Route exact path="/repositories" component={ListRepositories} />
+        <Route exact path="/repositories/:login" component={ListRepositories} />
+        <Route exact path="/repository/:owner/:name" component={FullRepository} />
         <Route exact path="/profile/:login/full" component={ProfilePage}/>
       </Switch>
     </Router>

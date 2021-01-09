@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import './css/header.css';
 import { AuthContext } from "../App";
+import { Redirect, NavLink } from "react-router-dom";
 import GitHubLogo from "./img/icons/github_PNG65.png";
 
 
@@ -21,14 +22,14 @@ useEffect(() => {
 }, [data]);
 
 
-const {avatar_url} = state.user;
+const {avatar_url,login} = state.user;
 
 
 
     return (
       <div className="header">
       <div className="logo">
-        <a href="#"><img className = "graphic_logo" src={GitHubLogo} alt=""></img></a>
+      <NavLink to={`/` }><img className = "graphic_logo" src={GitHubLogo} alt=""></img></NavLink>
       
             <div className="search">
                <form>
@@ -37,7 +38,7 @@ const {avatar_url} = state.user;
                 </form>
             </div>
           <div className="avatart__logo">	
-          <a href="#"><img className = "avatar_github_logo" src={avatar_url} alt=""></img></a>
+          <NavLink to={`/profile/${login}` }><img className = "avatar_github_logo" src={avatar_url} alt=""></img></NavLink>
         </div>
       </div>
       </div>

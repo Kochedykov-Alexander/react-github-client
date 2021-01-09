@@ -57,15 +57,6 @@ console.log(data)
 
 const {avatar_url, name, public_repos, followers, following, login} = data;
 
-const handleLogout = () => {
-  dispatch({
-    type: "LOGOUT",
-    payload:{
-      isLoggedIn: false,
-      user: state.user
-    }
-  });
-} 
 
 return (
   <Wrapper>

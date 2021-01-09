@@ -94,7 +94,7 @@ return(
                         <div className="profile__item__repo">
 										<span>
 										<img src={File}  alt="" />
-										<img src={Folder} className="img__repo" alt="" />
+                    <NavLink to={`/repositories/${login}`}><img src={Folder} className="img__repo" alt=""/></NavLink>
 										</span>
 						</div>
 
