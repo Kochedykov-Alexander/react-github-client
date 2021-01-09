@@ -7,6 +7,7 @@ import ListRepositories from "./components/Repositories/ListRepositories";
 import FullRepository from './components/Repositories/FullRepository';
 import { initialState, reducer } from "./store/reducer";
 import ProfilePage from './components/Profile/ProfilePage';
+import Search from './components/Search';
 
 interface IContextProps {
   state: any; 
@@ -28,6 +29,7 @@ export default function App() {
         <Route exact path="/repositories/:login" component={ListRepositories} />
         <Route exact path="/repository/:owner/:name" component={FullRepository} />
         <Route exact path="/profile/:login/full" component={ProfilePage}/>
+        <Route exact path="/search" component={Search}/>
       </Switch>
     </Router>
     </AuthContext.Provider>

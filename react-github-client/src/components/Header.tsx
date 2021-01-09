@@ -28,20 +28,20 @@ const {avatar_url,login} = state.user;
 
     return (
       <div className="header">
+    
       <div className="logo">
-      <NavLink to={`/` }><img className = "graphic_logo" src={GitHubLogo} alt=""></img></NavLink>
-      
+      <NavLink to={`/`}><img className = "graphic_logo" src={GitHubLogo} alt=""></img></NavLink>
             <div className="search">
-               <form>
+              <form>
                 <input type="text" placeholder="Искать здесь..."></input>
-                <button type="submit"></button>
-                </form>
+              </form>
             </div>
           <div className="avatart__logo">	
           <NavLink to={`/profile/${login}` }><img className = "avatar_github_logo" src={avatar_url} alt=""></img></NavLink>
         </div>
       </div>
       </div>
+    
   );
   }
 
