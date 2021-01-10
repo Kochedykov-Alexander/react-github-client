@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState, FormEvent } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect , Link} from "react-router-dom";
 import Styled from "styled-components";
 import { AuthContext } from "../App";
 import axios from 'axios';
 
 export default function Search() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const api = axios.create({
     baseURL: 'https://api.github.com',
   });
